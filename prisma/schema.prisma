@@ -104,3 +104,21 @@ model Follow {
   //We must give different names (like UserFollowers and UserFollowings)
   //✅ Because both fields connect to the same User table.
 }
+
+//GENERAL OVERVIEW OF PRISMA
+
+// If you’re starting to work with Prisma, you usually:
+
+// Define your schema (schema.prisma).
+// Use Prisma Migrate to update your DB schema.
+// Use Prisma Client in your app code to query the DB.
+// Optionally use Prisma Studio to visually browse/edit data.
+
+// What is Prisma?
+// Prisma is the overall ecosystem/toolkit for working with databases in modern apps. It includes several components like Prisma Client, Prisma Migrate, and Prisma Studio.
+
+// What does Prisma include?
+// Prisma Client: The query builder you use in your app.
+// Prisma Migrate: Tool to manage and apply schema migrations.
+// Prisma Studio: Visual UI for browsing/editing data.
+// CLI tools to manage your schema and database.
