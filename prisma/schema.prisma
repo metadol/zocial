@@ -121,4 +121,5 @@ model Follow {
 // Prisma Client: The query builder you use in your app.
 // Prisma Migrate: Tool to manage and apply schema migrations.
 // Prisma Studio: Visual UI for browsing/editing data.
+// Prisma Seed: Tool to seed your database with initial data,Show working data without manual entry.
 // CLI tools to manage your schema and database.
