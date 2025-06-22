@@ -1,12 +1,18 @@
 // Feed.tsx (Server Component)
-import Post from './Post';
+import { prisma } from "@/prisma";
+import Post from "./Post";
 
-const Feed = () => {
+const Feed = async () => {
+  const posts = await prisma.post.findMany();
+
+  console.log("Posts fetched:", posts);
   return (
     <div>
-      <Post />
-      <Post />
-      <Post />
+      {posts.map((post) => (
+        <div key={post.id}>
+          <Post />
+        </div>
+      ))}
     </div>
   );
 };
