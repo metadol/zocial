@@ -1,8 +1,14 @@
 import Feed from "@/components/feed/Feed";
 import Shared from "@/components/feed/Shared";
+import { prisma } from "@/prisma";
 import Link from "next/link";
 
-const Page = () => {
+const Page = async () => {
+
+  const allUsers = await prisma.user.findMany()
+
+  console.log("All Users:", allUsers);
+
   return (
     <div>
       <div className="flex items-center justify-between border-b text-textPrimary border-borderGray sticky top-0 bg-blurBlack backdrop-blur-md z-50">
