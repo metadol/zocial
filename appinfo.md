@@ -4,6 +4,8 @@ This is a full-stack modern social media application built using the latest feat
 
 ---
 
+optimistic ui updates 
+
 ## 🚀 Features
 
 - 🏗️ **Modular App Structure**
