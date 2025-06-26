@@ -46,3 +46,8 @@ export interface IconProps {
 export interface PostProps {
     type?: "post" | "status";
 }
+
+export interface HeaderProps {
+  title: string;
+  className?: string;
+}

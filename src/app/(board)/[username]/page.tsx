@@ -1,17 +1,13 @@
 import Feed from "@/components/feed/Feed";
+import FeedHeader from "@/components/feed/FeedHeader";
 import IKImageWrapper from "@/components/media/IKImageWrapper";
 import Link from "next/link";
 
 const Page = () => {
   return (
     <div>
-      {/* PROFILE TITLE */}
-      <div className="flex items-center gap-8 sticky top-0 backdrop-blur-md bg-blurBlack p-4 z-10">
-        <Link href="/">
-          <IKImageWrapper path="icons/back.svg" width={24} height={24} alt="back" />
-        </Link>
-        <h1 className="font-bold text-lg">LamaDev</h1>
-      </div>
+      {/* PROFILE HEADER */}
+      <FeedHeader title="LamaDev" className="bg-blurBlack" />
 
       {/* PROFILE INFO */}
       <div>
@@ -19,12 +15,22 @@ const Page = () => {
         <div className="relative w-full">
           {/* COVER IMAGE */}
           <div className="w-full aspect-[3/1] relative">
-            <IKImageWrapper path="general/cover.jpg" width={600} height={200} alt="cover" />
+            <IKImageWrapper
+              path="general/cover.jpg"
+              width={600}
+              height={200}
+              alt="cover"
+            />
           </div>
 
           {/* AVATAR IMAGE */}
           <div className="w-1/6 aspect-square rounded-full overflow-hidden border-4 border-black bg-gray-300 absolute left-4 -translate-y-1/2">
-            <IKImageWrapper path="general/avatar.png" width={600} height={600} alt="avatar" />
+            <IKImageWrapper
+              path="general/avatar.png"
+              width={600}
+              height={600}
+              alt="avatar"
+            />
           </div>
         </div>
 
@@ -35,7 +41,12 @@ const Page = () => {
               key={icon}
               className="w-9 h-9 flex items-center justify-center rounded-full border-2 border-gray-500 cursor-pointer"
             >
-              <IKImageWrapper path={`icons/${icon}.svg`} width={20} height={20} alt={icon} />
+              <IKImageWrapper
+                path={`icons/${icon}.svg`}
+                width={20}
+                height={20}
+                alt={icon}
+              />
             </div>
           ))}
           <button className="py-2 px-4 font-semibold bg-white text-black rounded-full">
@@ -54,11 +65,21 @@ const Page = () => {
           {/* LOCATION & JOIN DATE */}
           <div className="flex gap-4 text-textPrimary text-[15px]">
             <div className="flex items-center gap-2">
-              <IKImageWrapper path="icons/userLocation.svg" alt="location" width={20} height={20} />
+              <IKImageWrapper
+                path="icons/userLocation.svg"
+                alt="location"
+                width={20}
+                height={20}
+              />
               <span>USA</span>
             </div>
             <div className="flex items-center gap-2">
-              <IKImageWrapper path="icons/date.svg" alt="date" width={20} height={20} />
+              <IKImageWrapper
+                path="icons/date.svg"
+                alt="date"
+                width={20}
+                height={20}
+              />
               <span>Joined May 2021</span>
             </div>
           </div>

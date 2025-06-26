@@ -1,5 +1,5 @@
 // Feed.tsx (Server Component)
-import { prisma } from "@/prisma";
+import { prisma } from "@/utils/prisma";
 import Post from "./Post";
 
 const Feed = async () => {

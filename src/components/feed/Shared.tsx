@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import IKImageWrapper from "../media/IKImageWrapper";
 import Image from "next/image";
 import ImageEditor from "../media/ImageEditor";
-import { shareAction } from "@/actions";
+import { shareAction } from "@/utils/actions";
 
 const PostIcons = ["gif", "poll", "emoji", "schedule", "location"];
 

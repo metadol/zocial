@@ -17,18 +17,18 @@ export const menuList = [
     link: "/",
     icon: "notification.svg",
   },
-  {
-    id: 4,
-    name: "Messages",
-    link: "/",
-    icon: "message.svg",
-  },
-  {
-    id: 5,
-    name: "Bookmarks",
-    link: "/",
-    icon: "bookmark.svg",
-  },
+  // {
+  //   id: 4,
+  //   name: "Messages",
+  //   link: "/",
+  //   icon: "message.svg",
+  // },
+  // {
+  //   id: 5,
+  //   name: "Bookmarks",
+  //   link: "/",
+  //   icon: "bookmark.svg",
+  // },
 //   {
 //     id: 6,
 //     name: "Jobs",
@@ -53,12 +53,12 @@ export const menuList = [
     link: "/",
     icon: "profile.svg",
   },
-  {
-    id: 10,
-    name: "More",
-    link: "/",
-    icon: "more.svg",
-  },
+  // {
+  //   id: 10,
+  //   name: "More",
+  //   link: "/",
+  //   icon: "more.svg",
+  // },
 ];
 
 export const imageStyles: Record<"original" | "wide" | "square", string> = {

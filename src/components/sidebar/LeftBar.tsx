@@ -1,6 +1,6 @@
 import Link from "next/link";
 import IKImageWrapper from "../media/IKImageWrapper";
-import { menuList } from "@/data";
+import { menuList } from "@/utils/data";
 
 const LeftBar = () => {
   return (

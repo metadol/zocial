@@ -4,7 +4,7 @@ const isPrivateRoute = createRouteMatcher('/')
 
 export default clerkMiddleware(async (auth, req) => {
   if (isPrivateRoute(req)) {
-    await auth.protect()
+     await auth.protect()
   }
 }, { signInUrl: '/sign-in', signUpUrl: '/sign-up' });
 

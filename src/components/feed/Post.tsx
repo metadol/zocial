@@ -1,17 +1,18 @@
+// Post.tsx
+import { FC } from "react";
 import { RepostIcon } from "../common/ui/InteractionIcons";
 import IKImageWrapper from "../media/IKImageWrapper";
 import InteractionButton from "../common/ui/InteractionButton";
 import PostInfo from "./PostInfo";
 import PostInteractions from "./PostInteraction";
 import { FileDetailsResponse, PostProps } from "@/types/interface";
-import { imagekit } from "@/utils";
-import IKVideoWrapper from "../media/IKIVideoWrapper";
+import { imagekit } from "@/utils/imagekit";
+import PostHeader from "./PostHeader";
+import PostMedia from "./PostMedia";
 import Link from "next/link";
-import { FC } from 'react';
-
 
 const Post: FC<PostProps> = async ({ type = "post" }) => {
-  
+
   const getFileDetails = async (
     fileId: string
   ): Promise<FileDetailsResponse> => {
@@ -23,24 +24,23 @@ const Post: FC<PostProps> = async ({ type = "post" }) => {
     });
   };
 
-  const fileDetails = await getFileDetails("67f4d709432c476416efb6c3");
-  console.log("fetched file", fileDetails);
 
   const isStatus = type === "status";
+  const fileDetails = await getFileDetails("67f51db1432c47641638ae4d");
   const isImage = fileDetails?.fileType === "image";
   const isSensitive = fileDetails?.customMetadata?.sensitive;
 
   return (
     <div className="p-4 border-t border-borderGray">
-      {/* POST TYPE */}
+      {/* Repost Label */}
       <div className="flex items-center gap-2 mb-2 text-sm font-bold text-textPrimary">
         <InteractionButton icon={RepostIcon} />
         <span>lama dev reposted</span>
       </div>
 
-      {/* POST CONTENT */}
-      <div className={`flex gap-4 ${isStatus ? "flex-col" : ""}`}>
-        {/* AVATAR */}
+      {/* Layout Adjusted Here */}
+      <div className={`flex ${isStatus ? "flex-col" : "gap-4"}`}>
+        {/* Avatar outside (only for non-status posts) */}
         {!isStatus && (
           <div className="relative w-10 h-10 overflow-hidden rounded-full">
             <IKImageWrapper
@@ -52,35 +52,12 @@ const Post: FC<PostProps> = async ({ type = "post" }) => {
           </div>
         )}
 
-        {/* CONTENT */}
+        {/* Content Column */}
         <div className="flex flex-col flex-1 gap-2">
-          {/* POST OWNER + DATE */}
-          <div className="w-full flex justify-between">
-            <Link href="/lama" className="flex gap-4">
-              {isStatus && (
-                <div className="relative w-10 h-10 overflow-hidden rounded-full">
-                  <IKImageWrapper
-                    path="general/avatar.png"
-                    width={100}
-                    height={100}
-                    alt="avatar"
-                  />
-                </div>
-              )}
-              <div
-                className={`flex flex-wrap text-textPrimary ${
-                  isStatus ? "flex-col gap-0 items-start" : "items-center gap-2"
-                }`}
-              >
-                <h1 className="font-bold text-white text-md">Lama</h1>
-                <span className={isStatus ? "text-sm" : ""}>@lamawebdev</span>
-                {!isStatus && <span>1 day ago</span>}
-              </div>
-            </Link>
-            <PostInfo />
-          </div>
+          {/* Header (contains avatar for status) */}
+          <PostHeader isStatus={isStatus} />
 
-          {/* TEXT + MEDIA */}
+          {/* Text Content */}
           <Link href="/user/status/123">
             <p className={isStatus ? "text-lg" : ""}>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
@@ -90,26 +67,19 @@ const Post: FC<PostProps> = async ({ type = "post" }) => {
             </p>
           </Link>
 
-          {fileDetails &&
-            (isImage ? (
-              <IKImageWrapper
-                path={fileDetails.filePath}
-                width={fileDetails.width}
-                height={fileDetails.height}
-                alt="post"
-                className={isSensitive ? "blur-lg" : ""}
-              />
-            ) : (
-              <IKVideoWrapper
-                path={fileDetails.filePath}
-                className={isSensitive ? "blur-lg" : ""}
-              />
-            ))}
+          {/* Media */}
+          <PostMedia
+            file={fileDetails}
+            isImage={isImage}
+            isSensitive={!!isSensitive}
+          />
 
+          {/* Date only for status */}
           {isStatus && (
             <span className="text-textPrimary">5:54 PM · Apr 8, 2025</span>
           )}
 
+          {/* Interaction Row */}
           <PostInteractions />
         </div>
       </div>

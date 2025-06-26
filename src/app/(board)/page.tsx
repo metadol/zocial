@@ -1,6 +1,6 @@
 import Feed from "@/components/feed/Feed";
 import Shared from "@/components/feed/Shared";
-import { prisma } from "@/prisma";
+import { prisma } from "@/utils/prisma";
 import Link from "next/link";
 
 const Page = async () => {
