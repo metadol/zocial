@@ -19,6 +19,7 @@ optimistic ui updates
 - 🧾 **Comments and Likes** – Real-time interactions with Socket.io.
 - 🧑‍🤝‍🧑 **User Profile & Following System**
 - 🔔 **Real-time Notifications** – Like, comment, and follow actions trigger live alerts.
+custom auth pages usong clerk elemenes
 
 ---
 

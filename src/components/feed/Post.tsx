@@ -6,7 +6,7 @@ import InteractionButton from "../common/ui/InteractionButton";
 import PostInfo from "./PostInfo";
 import PostInteractions from "./PostInteraction";
 import { FileDetailsResponse, PostProps } from "@/types/interface";
-import { imagekit } from "@/utils/imagekit";
+import { imagekit } from "@/utils/utils";
 import PostHeader from "./PostHeader";
 import PostMedia from "./PostMedia";
 import Link from "next/link";

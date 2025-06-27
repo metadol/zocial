@@ -51,3 +51,9 @@ export interface HeaderProps {
   title: string;
   className?: string;
 }
+
+export interface LogoIconProps {
+  size?: number | string;
+  className?: string;
+}
+
