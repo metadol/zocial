@@ -57,3 +57,12 @@ export interface LogoIconProps {
   className?: string;
 }
 
+
+export interface UserPageProps {
+  params: Promise<{ username: string }>;
+}
+
+export interface FeedProps {
+  userProfileId?: string;
+}
+

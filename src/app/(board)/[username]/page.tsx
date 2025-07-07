@@ -1,9 +1,22 @@
 import Feed from "@/components/feed/Feed";
 import FeedHeader from "@/components/feed/FeedHeader";
 import IKImageWrapper from "@/components/media/IKImageWrapper";
+import { UserPageProps } from "@/types/interface";
+import { prisma } from "@/utils/prisma";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
-const Page = () => {
+
+const Page = async ({ params }: UserPageProps) => {
+
+  const { username } = await params; // ✅ await the Promise
+
+  const user = await prisma.user.findUnique({
+    where: { username },
+  });
+
+  if (!user) return notFound();
+
   return (
     <div>
       {/* PROFILE HEADER */}
@@ -81,7 +94,7 @@ const Page = () => {
                 height={20}
               />
               <span>Joined May 2021</span>
-            </div>
+            </div> 
           </div>
 
           {/* FOLLOWERS & FOLLOWING */}
@@ -102,6 +115,6 @@ const Page = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Page;

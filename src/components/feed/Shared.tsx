@@ -80,9 +80,9 @@ const Shared = () => {
               Edit
             </div>
             <div
-              className="absolute cursor-pointer top-1 right-1 bg-black bg-opacity-50 h-8 w-8 text-white rounded-full font-bold text-sm flex items-center justify-center"
+              className="absolute cursor-pointer top-1 right-1 bg-black bg-opacity-50 py-1 px-4 text-white rounded-full font-bold text-sm flex items-center justify-center"
               onClick={clearMedia}>
-              C
+              Close
             </div>
           </div>
         )}
