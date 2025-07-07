@@ -66,3 +66,7 @@ export interface FeedProps {
   userProfileId?: string;
 }
 
+export interface ActionButtonProps {
+  actionText?: string;
+  onClick?: () => void;
+};

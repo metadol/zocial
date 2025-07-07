@@ -5,6 +5,7 @@ import IKImageWrapper from "../media/IKImageWrapper";
 import Image from "next/image";
 import ImageEditor from "../media/ImageEditor";
 import { shareAction } from "@/utils/actions";
+import { ActionButton } from "../common/ui/Button";
 
 const PostIcons = ["gif", "poll", "emoji", "schedule", "location"];
 
@@ -81,7 +82,8 @@ const Shared = () => {
             </div>
             <div
               className="absolute cursor-pointer top-1 right-1 bg-black bg-opacity-50 py-1 px-4 text-white rounded-full font-bold text-sm flex items-center justify-center"
-              onClick={clearMedia}>
+              onClick={clearMedia}
+            >
               Close
             </div>
           </div>
@@ -95,7 +97,8 @@ const Shared = () => {
             />
             <div
               className="absolute cursor-pointer top-1 right-1 bg-black bg-opacity-50 h-8 w-8 text-white rounded-full font-bold text-sm flex items-center justify-center"
-              onClick={clearMedia}>
+              onClick={clearMedia}
+            >
               C
             </div>
           </div>
@@ -140,9 +143,7 @@ const Shared = () => {
               />
             ))}
           </div>
-          <button className="px-4 py-2 font-bold text-black bg-white rounded-full">
-            Post
-          </button>
+          <ActionButton actionText="Post" />
         </div>
       </div>
     </form>

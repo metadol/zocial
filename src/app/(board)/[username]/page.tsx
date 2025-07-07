@@ -1,3 +1,4 @@
+import { ActionButton } from "@/components/common/ui/Button";
 import Feed from "@/components/feed/Feed";
 import FeedHeader from "@/components/feed/FeedHeader";
 import IKImageWrapper from "@/components/media/IKImageWrapper";
@@ -6,9 +7,7 @@ import { prisma } from "@/utils/prisma";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-
 const Page = async ({ params }: UserPageProps) => {
-
   const { username } = await params; // ✅ await the Promise
 
   const user = await prisma.user.findUnique({
@@ -62,9 +61,7 @@ const Page = async ({ params }: UserPageProps) => {
               />
             </div>
           ))}
-          <button className="py-2 px-4 font-semibold bg-white text-black rounded-full">
-            follow
-          </button>
+          <ActionButton actionText="Follow" />
         </div>
 
         {/* USER DETAILS */}
@@ -94,7 +91,7 @@ const Page = async ({ params }: UserPageProps) => {
                 height={20}
               />
               <span>Joined May 2021</span>
-            </div> 
+            </div>
           </div>
 
           {/* FOLLOWERS & FOLLOWING */}
@@ -115,6 +112,6 @@ const Page = async ({ params }: UserPageProps) => {
       </div>
     </div>
   );
-}
+};
 
 export default Page;

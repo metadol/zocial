@@ -1,5 +1,6 @@
 import Link from "next/link";
 import IKImageWrapper from "../media/IKImageWrapper";
+import { ActionButton } from "../common/ui/Button";
 
 const recommendedUsers = [
   {
@@ -41,9 +42,7 @@ const Recommendations = () => {
             </div>
           </div>
           {/* Follow Button */}
-          <button className="py-1 px-4 font-semibold bg-white text-black rounded-full">
-            Follow
-          </button>
+          <ActionButton actionText="Follow" />
         </div>
       ))}
       <Link href="/" className="text-iconBlue">
