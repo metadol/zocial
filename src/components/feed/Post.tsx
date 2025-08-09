@@ -10,25 +10,30 @@ import { imagekit } from "@/utils/utils";
 import PostHeader from "./PostHeader";
 import PostMedia from "./PostMedia";
 import Link from "next/link";
+import { Avatar } from "../common/ui/Avatar";
+import { Post as PostType } from "@prisma/client";
 
-const Post: FC<PostProps> = async ({ type = "post" }) => {
+const Post = ({
+  type,
+  post,
+}: {
+  type?: "status" | "comment";
+  post: PostType;
+}) => {
 
-  const getFileDetails = async (
-    fileId: string
-  ): Promise<FileDetailsResponse> => {
-    return new Promise((resolve, reject) => {
-      imagekit.getFileDetails(fileId, function (error, result) {
-        if (error) reject(error);
-        else resolve(result as FileDetailsResponse);
-      });
-    });
-  };
-
-
-  const isStatus = type === "status";
-  const fileDetails = await getFileDetails("67f51db1432c47641638ae4d");
-  const isImage = fileDetails?.fileType === "image";
-  const isSensitive = fileDetails?.customMetadata?.sensitive;
+   const isStatus = type === "status";
+  // const fileDetails =
+  // {
+  //   "width": 600,
+  //   "height": 480,
+  //   "filePath": "/posts/event_MAlcZIoFd.jpg",
+  //   "customMetadata": {
+  //     "sensitive": false
+  //   },
+  //   "fileType": "image"
+  // }
+  // const isImage = fileDetails?.fileType === "image";
+  // const isSensitive = fileDetails?.customMetadata?.sensitive;
 
   return (
     <div className="p-4 border-t border-borderGray">
@@ -42,37 +47,27 @@ const Post: FC<PostProps> = async ({ type = "post" }) => {
       <div className={`flex ${isStatus ? "flex-col" : "gap-4"}`}>
         {/* Avatar outside (only for non-status posts) */}
         {!isStatus && (
-          <div className="relative w-10 h-10 overflow-hidden rounded-full">
-            <IKImageWrapper
-              path="general/avatar.png"
-              width={100}
-              height={100}
-              alt="avatar"
-            />
-          </div>
+          <Avatar path="general/avatar.png" />
         )}
 
         {/* Content Column */}
         <div className="flex flex-col flex-1 gap-2">
           {/* Header (contains avatar for status) */}
-          <PostHeader isStatus={isStatus} />
+          <PostHeader isStatus={isStatus} post={post} />
 
           {/* Text Content */}
           <Link href="/user/status/123">
             <p className={isStatus ? "text-lg" : ""}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
-              aliquam excepturi quia, eaque distinctio tempore tempora incidunt
-              magnam velit aliquid magni impedit mollitia voluptatum repudiandae
-              laudantium nemo cum, nam id.
+             {post?.desc}
             </p>
           </Link>
 
           {/* Media */}
-          <PostMedia
+          {/* <PostMedia
             file={fileDetails}
             isImage={isImage}
             isSensitive={!!isSensitive}
-          />
+          /> */}
 
           {/* Date only for status */}
           {isStatus && (

@@ -6,6 +6,7 @@ import Image from "next/image";
 import ImageEditor from "../media/ImageEditor";
 import { shareAction } from "@/utils/actions";
 import { ActionButton } from "../common/ui/Button";
+import { Avatar } from "../common/ui/Avatar";
 
 const PostIcons = ["gif", "poll", "emoji", "schedule", "location"];
 
@@ -48,14 +49,7 @@ const Shared = () => {
       action={(formData) => shareAction(formData, settings)}
     >
       {/* AVATAR */}
-      <div className="relative w-10 h-10 overflow-hidden rounded-full">
-        <IKImageWrapper
-          path="general/avatar.png"
-          width={100}
-          height={100}
-          alt="avatar"
-        />
-      </div>
+      <Avatar path="general/avatar.png" />
 
       {/* OTHERS */}
       <div className="flex flex-col flex-1 gap-4 ">

@@ -14,7 +14,7 @@ export interface FileDetailsResponse {
     width: number;
     height: number;
     filePath: string;
-    url: string;
+    url?: string;
     fileType: string;
     customMetadata?: { sensitive: boolean };
 }
