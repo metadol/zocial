@@ -59,6 +59,64 @@ export const fetchFeedPosts = async ({
     const posts = await prisma.post.findMany({
         where,
         orderBy: { createdAt: "desc" },
+        include: {
+            user: {
+                select: {
+                    displayName: true,
+                    username: true,
+                    img: true,
+                },
+            },
+            rePost: {
+                include: {
+                    user: {
+                        select: {
+                            displayName: true,
+                            username: true,
+                            img: true,
+                        },
+                    },
+                    _count: {
+                        select: {
+                            comments: true,
+                            likes: true,
+                            rePosts: true,
+                        },
+                    },
+                    likes: {
+                        where: { userId: loggedInUserId },
+                        select: { id: true }, // Only need to check if the user has liked this post
+                    },
+                    rePosts: {
+                        where: { userId: loggedInUserId },
+                        select: { id: true }, // Only need to check if the user has reposted this post
+                    },
+                    saves: {
+                        where: { userId: loggedInUserId },
+                        select: { id: true }, // Only need to check if the user has saved this post
+                    },
+                },
+            },
+            _count: {
+                select: {
+                    comments: true,
+                    likes: true,
+                    rePosts: true,
+                },
+            },
+            likes: {
+                where: { userId: loggedInUserId },
+                select: { id: true }, // Only need to check if the user has liked this post
+            },
+            rePosts: {
+                where: { userId: loggedInUserId },
+                select: { id: true }, // Only need to check if the user has reposted this post
+            },
+            saves: {
+                where: { userId: loggedInUserId },
+                select: { id: true }, // Only need to check if the user has saved this post
+            },
+        },
         take,
         skip,
     });

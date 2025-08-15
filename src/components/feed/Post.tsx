@@ -13,15 +13,33 @@ import Link from "next/link";
 import { Avatar } from "../common/ui/Avatar";
 import { Post as PostType } from "@prisma/client";
 
+
+type PostwithDetails = PostType & {
+  user: {
+    displayName: string | null;
+    username: string | null;
+    img: string | null;
+  };
+  rePost?: PostwithDetails; // <-- recursive, includes _count
+  _count: {
+    comments: number;
+    likes: number;
+    rePosts: number;
+  };
+};
+
+
+
 const Post = ({
   type,
   post,
 }: {
   type?: "status" | "comment";
-  post: PostType;
+  post: PostwithDetails;
 }) => {
 
-   const isStatus = type === "status";
+  const origanalPost = post.rePost || post;
+  const isStatus = type === "status";
   // const fileDetails =
   // {
   //   "width": 600,
@@ -38,27 +56,34 @@ const Post = ({
   return (
     <div className="p-4 border-t border-borderGray">
       {/* Repost Label */}
-      <div className="flex items-center gap-2 mb-2 text-sm font-bold text-textPrimary">
-        <InteractionButton icon={RepostIcon} />
-        <span>lama dev reposted</span>
-      </div>
+      {post?.rePostId &&
+        <div className="flex items-center gap-2 mb-2 text-sm font-bold text-textPrimary">
+          <InteractionButton icon={RepostIcon} />
+          <span>{post?.user?.displayName} reposted</span>
+        </div>
+      }
 
       {/* Layout Adjusted Here */}
       <div className={`flex ${isStatus ? "flex-col" : "gap-4"}`}>
         {/* Avatar outside (only for non-status posts) */}
         {!isStatus && (
-          <Avatar path="general/avatar.png" />
+          <Avatar path={origanalPost?.user.img} />
         )}
 
         {/* Content Column */}
         <div className="flex flex-col flex-1 gap-2">
           {/* Header (contains avatar for status) */}
-          <PostHeader isStatus={isStatus} post={post} />
+          <PostHeader
+            isStatus={isStatus}
+            post={origanalPost}
+            user={origanalPost?.user}
+            userImg={origanalPost?.user?.img || "general/no-avatar.jpg"}
+          />
 
           {/* Text Content */}
           <Link href="/user/status/123">
             <p className={isStatus ? "text-lg" : ""}>
-             {post?.desc}
+              {origanalPost?.desc}
             </p>
           </Link>
 
@@ -75,7 +100,12 @@ const Post = ({
           )}
 
           {/* Interaction Row */}
-          <PostInteractions />
+          <PostInteractions
+            count={origanalPost?._count}
+            isLiked={!!origanalPost?.likes?.length}
+            isReposted={!!origanalPost?.rePosts?.length}
+            isSaved={!!origanalPost?.saves?.length}
+          />
         </div>
       </div>
     </div>

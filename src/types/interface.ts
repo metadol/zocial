@@ -1,50 +1,50 @@
 export interface ImageSettings {
-    type: "original" | "wide" | "square";
-    sensitive: boolean;
+  type: "original" | "wide" | "square";
+  sensitive: boolean;
 }
 
 export interface ImageEditorProps {
-    onClose: () => void;
-    previewURL: string;
-    settings: ImageSettings;
-    setSettings: React.Dispatch<React.SetStateAction<ImageSettings>>;
+  onClose: () => void;
+  previewURL: string;
+  settings: ImageSettings;
+  setSettings: React.Dispatch<React.SetStateAction<ImageSettings>>;
 }
 
 export interface FileDetailsResponse {
-    width: number;
-    height: number;
-    filePath: string;
-    url?: string;
-    fileType: string;
-    customMetadata?: { sensitive: boolean };
+  width: number;
+  height: number;
+  filePath: string;
+  url?: string;
+  fileType: string;
+  customMetadata?: { sensitive: boolean };
 }
 
 export interface SVGIconProps {
-    className?: string;
-    path?: string;
-    onClick?: () => void;
+  className?: string;
+  path?: string;
+  onClick?: () => void;
 }
 
 export interface IKVideoWrapperProps {
-    path: string;
-    className?: string;
+  path: string;
+  className?: string;
 }
 
 export interface IKImageWrapperProps {
-    path: string;
-    width?: number;
-    height?: number;
-    alt: string;
-    className?: string;
+  path: string;
+  width?: number;
+  height?: number;
+  alt: string;
+  className?: string;
 }
 
 export interface IconProps {
-    className?: string;
-    onClick?: () => void;
+  className?: string;
+  onClick?: () => void;
 }
 
 export interface PostProps {
-    type?: "post" | "status";
+  type?: "post" | "status";
 }
 
 export interface HeaderProps {
@@ -70,3 +70,21 @@ export interface ActionButtonProps {
   actionText?: string;
   onClick?: () => void;
 };
+
+export interface ProfileActionsProps {
+  isFollowing?: boolean;
+  profileId?: string;
+}
+
+export interface AvatarProps {
+  path?: string | null
+  className?: string
+  width?: number
+  height?: number
+  alt?: string
+}
+export interface AvatarWithNameProps {
+  img: string | null; // Avatar image path
+  name: string | null;        // Display name
+  username: string | null;    // Username (without @)
+}

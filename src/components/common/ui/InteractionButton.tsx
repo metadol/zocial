@@ -1,53 +1,66 @@
 import { SVGIconProps } from "@/types/interface";
 
-type HoverColor = "iconBlue" | "iconGreen" | "iconRed";
-type ColorMapType = {
-  [Key in HoverColor]: {
-    text: string;
-    fill: string;
-  };
+type IconColor = "iconBlue" | "iconGreen" | "iconRed";
+
+interface ColorClasses {
+  text: string;
+  textHover: string;
+  fill: string;
+  fillHover: string;
+}
+
+const colorMap: Record<IconColor, ColorClasses> = {
+  iconBlue: {
+    text: "text-iconBlue",
+    textHover: "group-hover:text-iconBlue",
+    fill: "fill-iconBlue",
+    fillHover: "group-hover:fill-iconBlue",
+  },
+  iconGreen: {
+    text: "text-iconGreen",
+    textHover: "group-hover:text-iconGreen",
+    fill: "fill-iconGreen",
+    fillHover: "group-hover:fill-iconGreen",
+  },
+  iconRed: {
+    text: "text-iconRed",
+    textHover: "group-hover:text-iconRed",
+    fill: "fill-iconRed",
+    fillHover: "group-hover:fill-iconRed",
+  },
 };
+
 interface Interaction {
   icon: React.ComponentType<SVGIconProps>;
   count?: number;
-  hoverColor?: HoverColor;
+  hoverColor?: IconColor;
+  color?: IconColor; // Default color
 }
 
+const InteractionButton = ({
+  icon: Icon,
+  count,
+  hoverColor,
+  color,
+}: Interaction) => {
+  const iconClasses = [
+    color ? colorMap[color].fill : "fill-textPrimary",
+    hoverColor ? colorMap[hoverColor].fillHover : "",
+  ].filter(Boolean).join(" ");
 
-const colorMap: ColorMapType = {
-  iconBlue: {
-    text: "group-hover:text-iconBlue",
-    fill: "group-hover:fill-iconBlue",
-  },
-  iconGreen: {
-    text: "group-hover:text-iconGreen",
-    fill: "group-hover:fill-iconGreen",
-  },
-  iconRed: {
-    text: "group-hover:text-iconRed",
-    fill: "group-hover:fill-iconRed",
-  },
+  const textClasses = [
+    color ? colorMap[color].text : "",
+    hoverColor ? colorMap[hoverColor].textHover : "",
+  ].filter(Boolean).join(" ");
+
+  return (
+    <div
+      className={`flex items-center gap-2 ${hoverColor ? "cursor-pointer" : ""} group`}
+    >
+      <Icon className={iconClasses} />
+      {count !== undefined && <span className={`text-sm ${textClasses}`}>{count}</span>}
+    </div>
+  );
 };
-
-const InteractionButton = ({ icon: Icon, count, hoverColor }: Interaction) => (
-  <div
-    className={`flex items-center gap-2 ${
-      hoverColor ? "cursor-pointer" : ""
-    } group`}
-  >
-    <Icon
-      className={`fill-textPrimary ${
-        hoverColor ? colorMap[hoverColor].fill : ""
-      }`}
-    />
-    {count !== undefined && (
-      <span
-        className={`text-sm ${hoverColor ? colorMap[hoverColor].text : ""}`}
-      >
-        {count}
-      </span>
-    )}
-  </div>
-);
 
 export default InteractionButton;

@@ -1,13 +1,16 @@
 import Post from "./Post";
 import { auth } from "@clerk/nextjs/server";
 import { FeedProps } from "@/types/interface";
-import { fetchFeedPosts } from "@/utils/feed";
+import { fetchFeedPosts } from "@/utils/queries/feed";
 import InfiniteFeed from "./InfiniteFeed";
+import { getCurrentUserId } from "@/utils/currentuser";
 
 const Feed = async ({ userProfileId }: FeedProps) => {
-  const loggedInUserId = "user5"; // Replace with: const { userId } = await auth();
 
-  const { posts } = await fetchFeedPosts({ loggedInUserId, userProfileId });
+  const userId = await getCurrentUserId();
+
+  const { posts } = await fetchFeedPosts({ loggedInUserId: userId, userProfileId });
+
 
   if (!posts.length) return null;
 
@@ -15,7 +18,7 @@ const Feed = async ({ userProfileId }: FeedProps) => {
     <div className="space-y-4">
       {posts.map((post) => (
         <div key={post.id}>
-          <Post post={post}/>
+          <Post post={post} />
         </div>
       ))}
 

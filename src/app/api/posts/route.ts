@@ -1,5 +1,5 @@
 
-import { fetchFeedPosts } from "@/utils/feed";
+import { fetchFeedPosts } from "@/utils/queries/feed";
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest } from "next/server";
 

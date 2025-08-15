@@ -9,15 +9,20 @@ import { Post as PostType } from "@prisma/client";
 interface PostHeaderProps {
   isStatus: boolean;
   post: PostType;
+  user?: {
+    displayName: string | null;
+    username: string | null;
+  };
+  userImg: string | null;
 }
 
-export default function PostHeader({ isStatus, post }: PostHeaderProps) {
+export default function PostHeader({ isStatus, post, user, userImg }: PostHeaderProps) {
   return (
     <div className="w-full flex justify-between">
-      <Link href="/lama" className="flex gap-4">
+     <Link href={user?.username ?? '/'} className="flex gap-4">
         {/* Avatar for status */}
-        {isStatus && (
-          <Avatar path="general/avatar.png" />
+        {isStatus && userImg && (
+          <Avatar path={userImg} />
         )}
 
         {/* User Info */}
@@ -27,8 +32,8 @@ export default function PostHeader({ isStatus, post }: PostHeaderProps) {
             : "flex items-center gap-2 flex-wrap"
             }`}
         >
-          <h1 className="font-bold text-white text-md">Lama</h1>
-          <span className={isStatus ? "text-sm" : ""}>@lamawebdev</span>
+          <h1 className="font-bold text-white text-md">{user?.displayName}</h1>
+          <span className={isStatus ? "text-sm" : ""}>@{user?.username}</span>
           {!isStatus && post && <span>{format(post.createdAt)}</span>}
         </div>
       </Link>
