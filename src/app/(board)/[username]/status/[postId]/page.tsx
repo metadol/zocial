@@ -1,17 +1,24 @@
 import Comments from "@/components/features/Comments";
-import IKImageWrapper from "@/components/media/IKImageWrapper";
 import Post from "@/components/feed/Post";
-import Link from "next/link";
 import FeedHeader from "@/components/feed/FeedHeader";
+import { getCurrentUserId } from "@/utils/currentuser";
+import { getPostById } from "@/utils/queries/singlepost";
 
-const StatusPage = () => {
+export default async function Page({ params }: { params: { username: string, postId: string } }) {
+  const { postId } = params;
+
+  const userId = await getCurrentUserId();
+
+  const post = await getPostById(Number(postId), userId);
+
   return (
-    <div className="">
+    <div>
       <FeedHeader title="Post" />
-      <Post type="status" />
-      <Comments />
+      <Post type="status" post={post} />
+      <Comments
+        comments={post?.comments}
+        postId={post?.id}
+        username={post?.user?.username} />
     </div>
   );
-};
-
-export default StatusPage;
+}

@@ -81,7 +81,7 @@ const Post = ({
           />
 
           {/* Text Content */}
-          <Link href="/user/status/123">
+          <Link href={`/${origanalPost?.user?.username}/status/${origanalPost?.id}`} >
             <p className={isStatus ? "text-lg" : ""}>
               {origanalPost?.desc}
             </p>

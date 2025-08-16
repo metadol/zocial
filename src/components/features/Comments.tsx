@@ -1,7 +1,24 @@
 import IKImageWrapper from "../media/IKImageWrapper";
 import Post from "../feed/Post";
+import { Post as PostType } from "@prisma/client";
 
-const Comments = () => {
+type CommentWithDetails = PostType & {
+  user: { displayName: string | null; username: string; img: string | null };
+  _count: { likes: number; rePosts: number; comments: number };
+  likes: { id: number }[];
+  rePosts: { id: number }[];
+  saves: { id: number }[];
+};
+
+const Comments = ({
+  comments,
+  postId,
+  username,
+}: {
+  comments: CommentWithDetails[];
+  postId: number;
+  username: string;
+}) => {
   return (
     <div className="border-t border-borderGray">
       <form className="flex flex-wrap items-center gap-4 p-4">
@@ -24,13 +41,14 @@ const Comments = () => {
           Reply
         </button>
       </form>
-
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
+      {comments.map((comment) => (
+        <div key={comment.id} >
+          <Post
+            type="comment"
+            post={comment}
+          />
+        </div>
+      ))}
     </div>
   );
 };
