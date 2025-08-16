@@ -1,6 +1,7 @@
 import IKImageWrapper from "../media/IKImageWrapper";
 import Post from "../feed/Post";
 import { Post as PostType } from "@prisma/client";
+import { ActionButton } from "../common/ui/Button";
 
 type CommentWithDetails = PostType & {
   user: { displayName: string | null; username: string; img: string | null };
@@ -37,9 +38,7 @@ const Comments = ({
           placeholder="Post your reply"
         />
 
-        <button className="py-2 px-4 font-bold bg-white text-black rounded-full shrink-0">
-          Reply
-        </button>
+        <ActionButton actionText="Reply" />
       </form>
       {comments.map((comment) => (
         <div key={comment.id} >

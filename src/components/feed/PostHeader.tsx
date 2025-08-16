@@ -19,7 +19,7 @@ interface PostHeaderProps {
 export default function PostHeader({ isStatus, post, user, userImg }: PostHeaderProps) {
   return (
     <div className="w-full flex justify-between">
-     <Link href={user?.username ?? '/'} className="flex gap-4">
+      <Link href={`/${user?.username ?? ''}`} className="flex gap-4">
         {/* Avatar for status */}
         {isStatus && userImg && (
           <Avatar path={userImg} />
