@@ -54,12 +54,12 @@ const InteractionButton = ({
   ].filter(Boolean).join(" ");
 
   return (
-    <div
+    <button
       className={`flex items-center gap-2 ${hoverColor ? "cursor-pointer" : ""} group`}
     >
       <Icon className={iconClasses} />
       {count !== undefined && <span className={`text-sm ${textClasses}`}>{count}</span>}
-    </div>
+    </button>
   );
 };
 
