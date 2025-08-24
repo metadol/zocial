@@ -45,7 +45,7 @@ const Shared = () => {
 
   return (
     <form
-      className="flex gap-4 p-4"
+      className="flex gap-4 p-4 flex-col xs:flex-row"
       action={(formData) => shareAction(formData, settings)}
     >
       {/* AVATAR */}

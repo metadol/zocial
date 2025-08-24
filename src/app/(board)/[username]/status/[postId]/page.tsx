@@ -11,7 +11,7 @@ export default async function Page({ params }: { params: { username: string, pos
 
   const post = await getPostById(Number(postId), userId);
 
-  return (
+  return (  
     <div>
       <FeedHeader title="Post" />
       <Post type="status" post={post} />

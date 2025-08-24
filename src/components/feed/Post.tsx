@@ -63,8 +63,8 @@ const Post = ({
         </div>
       }
 
-      {/* Layout Adjusted Here */}
-      <div className={`flex ${isStatus ? "flex-col" : "gap-4"}`}>
+      {/* Layout Adjusted ere */}
+      <div className={`flex flex-col ${isStatus ? "" : " xs:flex-row gap-4"}`}>
         {/* Avatar outside (only for non-status posts) */}
         {!isStatus && (
           <Avatar path={origanalPost?.user.img} />
