@@ -70,6 +70,7 @@ export interface FeedProps {
 export interface ActionButtonProps {
   actionText?: string;
   onClick?: () => void;
+  disabled?: boolean;
 };
 
 export interface ProfileActionsProps {

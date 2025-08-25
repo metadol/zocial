@@ -31,6 +31,7 @@ export async function getPostById(postId: number, loggedInUserId: string) {
                 select: { id: true },
             },
             comments: {
+                orderBy: { createdAt: "desc" },
                 include: {
                     user: {
                         select: {

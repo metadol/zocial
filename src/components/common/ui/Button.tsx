@@ -15,11 +15,13 @@ export function BackButton() {
 export function ActionButton({
   actionText = "Follow",
   onClick,
+  disabled = false,
 }: ActionButtonProps) {
   return (
     <button
       onClick={onClick}
-      className="py-2 px-4 font-semibold bg-white text-black rounded-full"
+      disabled={disabled}
+      className="py-2 px-4 font-semibold bg-white text-black rounded-full disabled:cursor-not-allowed disabled:bg-slate-200"
     >
       {actionText}
     </button>
