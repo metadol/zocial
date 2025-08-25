@@ -1,7 +1,10 @@
+"use client";
 import IKImageWrapper from "../media/IKImageWrapper";
 import Post from "../feed/Post";
 import { Post as PostType } from "@prisma/client";
 import { ActionButton } from "../common/ui/Button";
+import { useUser } from "@clerk/nextjs";
+import { Avatar } from "../common/ui/Avatar";
 
 type CommentWithDetails = PostType & {
   user: { displayName: string | null; username: string; img: string | null };
@@ -20,17 +23,13 @@ const Comments = ({
   postId: number;
   username: string;
 }) => {
+
+  const { isLoaded, isSignedIn, user } = useUser();
+
   return (
     <div className="border-t border-borderGray">
       <form className="flex flex-wrap items-center gap-4 p-4">
-        <div className="w-10 h-10 min-w-[40px] rounded-full overflow-hidden">
-          <IKImageWrapper
-            path="general/avatar.png"
-            alt="Lama Dev"
-            width={100}
-            height={100}
-          />
-        </div>
+        <Avatar src={user?.imageUrl} />
 
         <input
           type="text"

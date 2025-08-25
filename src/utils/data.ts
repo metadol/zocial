@@ -1,3 +1,11 @@
+import {
+  CommentIcon,
+  RepostIcon,
+  LikeIcon,
+  BookmarkIcon,
+  ShareIcon,
+} from "@/components/common/ui/InteractionIcons";
+
 export const menuList = [
   {
     id: 1,
@@ -29,24 +37,24 @@ export const menuList = [
   //   link: "/",
   //   icon: "bookmark.svg",
   // },
-//   {
-//     id: 6,
-//     name: "Jobs",
-//     link: "/",
-//     icon: "job.svg",
-//   },
-//   {
-//     id: 7,
-//     name: "Communities",
-//     link: "/",
-//     icon: "community.svg",
-//   },
-//   {
-//     id: 8,
-//     name: "Premium",
-//     link: "/",
-//     icon: "logo.svg",
-//   },
+  //   {
+  //     id: 6,
+  //     name: "Jobs",
+  //     link: "/",
+  //     icon: "job.svg",
+  //   },
+  //   {
+  //     id: 7,
+  //     name: "Communities",
+  //     link: "/",
+  //     icon: "community.svg",
+  //   },
+  //   {
+  //     id: 8,
+  //     name: "Premium",
+  //     link: "/",
+  //     icon: "logo.svg",
+  //   },
   {
     id: 9,
     name: "Profile",
@@ -67,5 +75,35 @@ export const imageStyles: Record<"original" | "wide" | "square", string> = {
   square: "aspect-square object-cover",
 };
 
+
+
+
+export const interactions = [
+  { icon: CommentIcon, hoverColor: "iconBlue" as const, value: "comments" as const , },
+  { icon: RepostIcon, hoverColor: "iconGreen" as const, value: "rePosts" as const },
+  { icon: LikeIcon, hoverColor: "iconRed" as const, value: "likes" as const },
+];
+
+export const extraInteractions = [
+  { icon: BookmarkIcon, hoverColor: "iconBlue" as const, value: "saves" as const },
+  { icon: ShareIcon, hoverColor: "iconBlue" as const, value: "shares" as const },
+];
+
+export const optimisticActions = {
+    like: (prev: any) => ({
+        ...prev,
+        likes: prev.isLiked ? prev.likes - 1 : prev.likes + 1,
+        isLiked: !prev.isLiked,
+    }),
+    rePost: (prev: any) => ({
+        ...prev,
+        rePosts: prev.isRePosted ? prev.rePosts - 1 : prev.rePosts + 1,
+        isRePosted: !prev.isRePosted,
+    }),
+    save: (prev: any) => ({
+        ...prev,
+        isSaved: !prev.isSaved,
+    }),
+};
 
 

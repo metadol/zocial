@@ -35,6 +35,7 @@ interface Interaction {
   count?: number;
   hoverColor?: IconColor;
   color?: IconColor; // Default color
+  action?: () => void;
 }
 
 const InteractionButton = ({
@@ -42,6 +43,7 @@ const InteractionButton = ({
   count,
   hoverColor,
   color,
+  action,
 }: Interaction) => {
   const iconClasses = [
     color ? colorMap[color].fill : "fill-textPrimary",
@@ -54,12 +56,14 @@ const InteractionButton = ({
   ].filter(Boolean).join(" ");
 
   return (
-    <button
-      className={`flex items-center gap-2 ${hoverColor ? "cursor-pointer" : ""} group`}
-    >
-      <Icon className={iconClasses} />
-      {count !== undefined && <span className={`text-sm ${textClasses}`}>{count}</span>}
-    </button>
+    <form action={action}>
+      <button
+        className={`flex items-center gap-2 ${hoverColor ? "cursor-pointer" : ""} group`}
+      >
+        <Icon className={iconClasses} />
+        {count !== undefined && <span className={`text-sm ${textClasses}`}>{count}</span>}
+      </button>
+    </form>
   );
 };
 

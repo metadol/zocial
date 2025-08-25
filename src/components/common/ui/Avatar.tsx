@@ -9,6 +9,7 @@ export const Avatar = ({
     width = 100,
     height = 100,
     alt = 'avatar',
+    src
 }: AvatarProps) => {
     return (
         <div className={`overflow-hidden rounded-full ${className}`}>
@@ -17,6 +18,7 @@ export const Avatar = ({
                 width={width}
                 height={height}
                 alt={alt}
+                src={src}
             />
         </div>
     )

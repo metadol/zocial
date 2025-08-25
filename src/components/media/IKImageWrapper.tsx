@@ -12,10 +12,12 @@ const IKImageWrapper = ({
   height,
   alt,
   className,
+  src
 }: IKImageWrapperProps) => {
   return (
     <IKImage
       path={path}
+      src={src}
       width={width}
       height={height}
       alt={alt}

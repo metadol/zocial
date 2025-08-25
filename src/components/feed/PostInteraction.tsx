@@ -1,45 +1,133 @@
 "use client";
 
-import {
-  CommentIcon,
-  RepostIcon,
-  LikeIcon,
-  BookmarkIcon,
-  ShareIcon,
-} from "@/components/common/ui/InteractionIcons";
+import { extraInteractions, interactions, optimisticActions } from "@/utils/data";
 import InteractionButton from "../common/ui/InteractionButton";
+import { PostInteractionsProps } from "@/types/interface";
+import { likePost, rePost, savePost } from "@/action";
+import React from "react";
 
-interface PostInteractionsProps {
-  count: {
-    likes: number;
-    comments: number;
-    rePosts: number;
+const PostInteractions: React.FC<PostInteractionsProps> = ({
+  count,
+  isLiked,
+  isRePosted,
+  isSaved,
+  postId
+}) => {
+  const [state, setState] = React.useState({
+    likes: count.likes,
+    isLiked: isLiked,
+    rePosts: count.rePosts,
+    isRePosted,
+    isSaved,
+  });
+
+
+  const handleLike = async () => {
+    // Update state immediately (no optimistic update needed)
+    const newIsLiked = !state.isLiked;
+    const newLikes = newIsLiked ? state.likes + 1 : state.likes - 1;
+
+    setState(prev => ({
+      ...prev,
+      likes: newLikes,
+      isLiked: newIsLiked,
+    }));
+
+    try {
+      await likePost(postId);
+      // Server action succeeded, state already updated
+    } catch (error) {
+      console.error("Like action failed:", error);
+      // Revert the state on error
+      setState(prev => ({
+        ...prev,
+        likes: state.likes,
+        isLiked: state.isLiked,
+      }));
+    }
   };
-  isLiked?: boolean;
-  isReposted?: boolean;
-  isSaved?: boolean;
-}
 
-const interactions = [
-  { icon: CommentIcon, hoverColor: "iconBlue" as const, value: "comments" as const },
-  { icon: RepostIcon, hoverColor: "iconGreen" as const, value: "rePosts" as const },
-  { icon: LikeIcon, hoverColor: "iconRed" as const, value: "likes" as const },
-];
+  const handleRepost = async () => {
+    // Update state immediately (no optimistic update needed)
+    const newIsRePosted = !state.isRePosted;
+    const newRePosts = newIsRePosted ? state.rePosts + 1 : state.rePosts - 1;
 
-const extraInteractions = [
-  { icon: BookmarkIcon, hoverColor: "iconBlue" as const, value: "saves" as const },
-  { icon: ShareIcon, hoverColor: "iconBlue" as const, value: "shares" as const },
-];
+    setState(prev => ({
+      ...prev,
+      rePosts: newRePosts,
+      isRePosted: newIsRePosted,
+    }));
 
-const PostInteractions: React.FC<PostInteractionsProps> = ({ count, isLiked, isReposted, isSaved }) => {
-  // 🔹 Simple inline color mapping based on props
-  const activeColors = {
-    likes: isLiked ? "iconRed" : undefined,
-    rePosts: isReposted ? "iconGreen" : undefined,
-    comments: undefined,
-    saves: isSaved ? "iconBlue" : undefined,
-    shares: undefined,
+    try {
+      await rePost(postId);
+      // Server action succeeded, state already updated
+    } catch (error) {
+      console.error("Repost action failed:", error);
+      // Revert the state on error
+      setState(prev => ({
+        ...prev,
+        rePosts: state.rePosts,
+        isRePosted: state.isRePosted,
+      }));
+    }
+  };
 
+  const handleSave = async () => {
+    // Update state immediately (no optimistic update needed)
+    const newIsSaved = !state.isSaved;
+
+    setState(prev => ({
+      ...prev,
+      isSaved: newIsSaved,
+    }));
+
+    try {
+      await savePost(postId);
+      // Server action succeeded, state already updated
+    } catch (error) {
+      console.error("Save action failed:", error);
+      // Revert the state on error
+      setState(prev => ({
+        ...prev,
+        isSaved: state.isSaved,
+      }));
+    }
+  };
+
+  const handleShare = () => {
+    console.log("Shared!");
+  };
+
+  const handleComment = () => {
+    console.log("Comment clicked");
+  };
+
+  const interactionConfig = {
+    likes: {
+      color: state.isLiked ? "iconRed" : undefined,
+      action: handleLike,
+      count: state.likes,
+    },
+    rePosts: {
+      color: state.isRePosted ? "iconGreen" : undefined,
+      action: handleRepost,
+      count: state.rePosts,
+    },
+    saves: {
+      color: state.isSaved ? "iconBlue" : undefined,
+      action: handleSave,
+      count: undefined,
+    },
+    comments: {
+      color: undefined,
+      action: handleComment,
+      count: count.comments,
+    },
+    shares: {
+      color: undefined,
+      action: handleShare,
+      count: undefined,
+    },
   } as const;
 
   return (
@@ -49,9 +137,10 @@ const PostInteractions: React.FC<PostInteractionsProps> = ({ count, isLiked, isR
           <InteractionButton
             key={interaction.value}
             icon={interaction.icon}
-            count={count[interaction.value]}
             hoverColor={interaction.hoverColor}
-            color={activeColors[interaction.value]}
+            count={interactionConfig[interaction.value].count}
+            color={interactionConfig[interaction.value].color}
+            action={interactionConfig[interaction.value].action}
           />
         ))}
       </div>
@@ -62,7 +151,8 @@ const PostInteractions: React.FC<PostInteractionsProps> = ({ count, isLiked, isR
             key={index}
             icon={interaction.icon}
             hoverColor={interaction.hoverColor}
-            color={activeColors[interaction.value]}
+            color={interactionConfig[interaction.value].color}
+            action={interactionConfig[interaction.value].action}
           />
         ))}
       </div>

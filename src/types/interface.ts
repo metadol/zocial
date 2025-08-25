@@ -36,6 +36,7 @@ export interface IKImageWrapperProps {
   height?: number;
   alt: string;
   className?: string;
+  src?: string; // Added src prop for direct URL usage
 }
 
 export interface IconProps {
@@ -82,9 +83,22 @@ export interface AvatarProps {
   width?: number
   height?: number
   alt?: string
+  src?: string // Added src prop for direct URL usage
 }
 export interface AvatarWithNameProps {
   img: string | null; // Avatar image path
   name: string | null;        // Display name
   username: string | null;    // Username (without @)
+}
+
+export interface PostInteractionsProps {
+  count: {
+    likes: number;
+    comments: number;
+    rePosts: number;
+  };
+  isLiked?: boolean;
+  isRePosted?: boolean;
+  isSaved?: boolean;
+  postId?: number;
 }

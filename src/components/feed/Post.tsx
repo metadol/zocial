@@ -105,6 +105,7 @@ const Post = ({
             isLiked={!!origanalPost?.likes?.length}
             isReposted={!!origanalPost?.rePosts?.length}
             isSaved={!!origanalPost?.saves?.length}
+            postId={origanalPost?.id}
           />
         </div>
       </div>
