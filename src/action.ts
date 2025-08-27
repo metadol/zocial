@@ -239,6 +239,5 @@ export const addPost = async (
         console.log(err);
         return { success: false, error: true };
     }
-    return { success: false, error: true };
 };
 

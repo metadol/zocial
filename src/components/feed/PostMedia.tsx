@@ -4,15 +4,19 @@ import IKVideoWrapper from "../media/IKIVideoWrapper";
 import { FileDetailsResponse } from "@/types/interface";
 
 interface PostMediaProps {
-  file: FileDetailsResponse;
+  file: string | null | undefined;
   isImage: boolean;
   isSensitive: boolean;
+  width?: number;
+  height?: number | undefined;
 }
 
 export default function PostMedia({
   file,
   isImage,
   isSensitive,
+  width,
+  height,
 }: PostMediaProps) {
   if (!file) return null;
 
@@ -20,13 +24,13 @@ export default function PostMedia({
 
   return isImage ? (
     <IKImageWrapper
-      path={file.filePath}
-      width={file.width}
-      height={file.height}
+      path={file}
+      width={width}
+      height={height}
       alt="post"
       className={blurClass}
     />
   ) : (
-    <IKVideoWrapper path={file.filePath} className={blurClass} />
+    <IKVideoWrapper path={file} className={blurClass} />
   );
 }

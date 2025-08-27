@@ -40,18 +40,7 @@ const Post = ({
 
   const origanalPost = post.rePost || post;
   const isStatus = type === "status";
-  // const fileDetails =
-  // {
-  //   "width": 600,
-  //   "height": 480,
-  //   "filePath": "/posts/event_MAlcZIoFd.jpg",
-  //   "customMetadata": {
-  //     "sensitive": false
-  //   },
-  //   "fileType": "image"
-  // }
-  // const isImage = fileDetails?.fileType === "image";
-  // const isSensitive = fileDetails?.customMetadata?.sensitive;
+
 
   return (
     <div className="p-4 border-t border-borderGray">
@@ -85,14 +74,18 @@ const Post = ({
             <p className={isStatus ? "text-lg" : ""}>
               {origanalPost?.desc}
             </p>
-          </Link>
 
-          {/* Media */}
-          {/* <PostMedia
-            file={fileDetails}
-            isImage={isImage}
-            isSensitive={!!isSensitive}
-          /> */}
+
+            {/* Media */}
+            <PostMedia
+              file={origanalPost.img ?? origanalPost.video}
+              isImage={!!origanalPost.img}
+              isSensitive={!!origanalPost.isSensitive}
+              width={600}
+              height={origanalPost.imgHeight ?? 600}
+
+            />
+          </Link>
 
           {/* Date only for status */}
           {isStatus && (

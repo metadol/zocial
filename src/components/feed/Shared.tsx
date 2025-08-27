@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import IKImageWrapper from "../media/IKImageWrapper";
 import Image from "next/image";
 import ImageEditor from "../media/ImageEditor";
 import { shareAction } from "@/utils/actions";
 import { ActionButton } from "../common/ui/Button";
 import { Avatar } from "../common/ui/Avatar";
+import { addPost } from "@/action";
 
 const PostIcons = ["gif", "poll", "emoji", "schedule", "location"];
 
@@ -43,19 +44,34 @@ const Shared = () => {
 
   const previewURL = media ? URL.createObjectURL(media) : null;
 
+  const [state, formAction, isPending] = React.useActionState(addPost, {
+    success: false,
+    error: false,
+  });
+
+  React.useEffect(() => {
+    if (state.success) {
+      clearMedia();
+    }
+  }, [state]);
+
+
+
   return (
     <form
       className="flex gap-4 p-4 flex-col xs:flex-row"
-      action={(formData) => shareAction(formData, settings)}
+      action={formAction}
     >
       {/* AVATAR */}
       <Avatar path="general/avatar.png" />
 
       {/* OTHERS */}
       <div className="flex flex-col flex-1 gap-4 ">
+        <input name="imgType" value={settings.type} hidden readOnly />
+        <input name="isSensitive" value={settings.sensitive ? "true" : "false"} hidden readOnly />
         <input
           type="text"
-          name="description"
+          name="desc"
           placeholder="What's happening?"
           className="text-xl bg-transparent outline-none placeholder:text-textPrimary"
         />
@@ -137,7 +153,11 @@ const Shared = () => {
               />
             ))}
           </div>
-          <ActionButton actionText="Post" />
+          <ActionButton
+            actionText={isPending ? "Posting" : "Post"}
+            disabled={isPending}
+          />
+          {state.error && (<span className="text-red-300">Something went wrong!</span>)}
         </div>
       </div>
     </form>
