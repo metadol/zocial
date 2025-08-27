@@ -30,6 +30,8 @@ export const followUser = async (targetUserId: string) => {
             data: { followerId: userId, followingId: targetUserId },
         });
     }
+
+    revalidatePath(`/${targetUserId}`); 
 };
 
 

@@ -8,6 +8,7 @@ import { shareAction } from "@/utils/actions";
 import { ActionButton } from "../common/ui/Button";
 import { Avatar } from "../common/ui/Avatar";
 import { addPost } from "@/action";
+import { useUser } from "@clerk/nextjs";
 
 const PostIcons = ["gif", "poll", "emoji", "schedule", "location"];
 
@@ -56,6 +57,7 @@ const Shared = () => {
   }, [state]);
 
 
+  const { isLoaded, isSignedIn, user } = useUser();
 
   return (
     <form
@@ -63,7 +65,7 @@ const Shared = () => {
       action={formAction}
     >
       {/* AVATAR */}
-      <Avatar path="general/avatar.png" />
+      <Avatar src={user?.imageUrl} />
 
       {/* OTHERS */}
       <div className="flex flex-col flex-1 gap-4 ">
