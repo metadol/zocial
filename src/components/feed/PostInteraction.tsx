@@ -3,7 +3,7 @@
 import { extraInteractions, interactions, optimisticActions } from "@/utils/data";
 import InteractionButton from "../common/ui/InteractionButton";
 import { PostInteractionsProps } from "@/types/interface";
-import { likePost, rePost, savePost } from "@/action";
+import { likePost, rePost, savePost } from "@/utils/action";
 import React from "react";
 
 const PostInteractions: React.FC<PostInteractionsProps> = ({

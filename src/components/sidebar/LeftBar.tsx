@@ -2,6 +2,7 @@
 import Link from "next/link";
 import IKImageWrapper from "../media/IKImageWrapper";
 import { menuList } from "@/utils/data";
+import SocketProvider from "@/providers/SocketProvider";
 
 interface LeftBarProps {
   isMobile?: boolean;
@@ -102,7 +103,10 @@ const LeftBar = ({ isMobile = false }: LeftBarProps) => {
         <div className="hidden 2xl:block cursor-pointer font-bold hover:bg-[#181818] p-2 rounded-full transition-colors">
           ...
         </div>
+        
       </div>
+
+      <SocketProvider/>
     </div>
   );
 };

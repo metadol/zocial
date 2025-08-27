@@ -3,7 +3,7 @@ import { ProfileActionsProps } from "@/types/interface"
 import { ActionButton } from "../common/ui/Button"
 import React from "react";
 import { useUser } from "@clerk/nextjs";
-import { followUser } from "@/action";
+import { followUser } from "@/utils/action";
 
 const FollowButton = ({ isFollowing = false, profileId }: ProfileActionsProps) => {
     const [state, setState] = React.useState(isFollowing);

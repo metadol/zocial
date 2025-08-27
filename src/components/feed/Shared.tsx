@@ -4,10 +4,9 @@ import React, { useState, useRef } from "react";
 import IKImageWrapper from "../media/IKImageWrapper";
 import Image from "next/image";
 import ImageEditor from "../media/ImageEditor";
-import { shareAction } from "@/utils/actions";
 import { ActionButton } from "../common/ui/Button";
 import { Avatar } from "../common/ui/Avatar";
-import { addPost } from "@/action";
+import { addPost } from "@/utils/action";
 import { useUser } from "@clerk/nextjs";
 
 const PostIcons = ["gif", "poll", "emoji", "schedule", "location"];
@@ -57,7 +56,7 @@ const Shared = () => {
   }, [state]);
 
 
-  const { isLoaded, isSignedIn, user } = useUser();
+  const { user } = useUser();
 
   return (
     <form

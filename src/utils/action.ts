@@ -1,12 +1,12 @@
 "use server";
 
-import { prisma } from "./utils/prisma";
+import { prisma } from "./prisma";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { UploadResponse } from "imagekit/dist/libs/interfaces";
-import { imagekit } from "./utils/utils";
+import { imagekit } from "./utils";
 import { get } from "http";
-import { getCurrentUserId } from "./utils/currentuser";
+import { getCurrentUserId } from "./currentuser";
 
 export const followUser = async (targetUserId: string) => {
 

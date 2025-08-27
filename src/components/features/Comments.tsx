@@ -6,7 +6,7 @@ import { ActionButton } from "../common/ui/Button";
 import { useUser } from "@clerk/nextjs";
 import { Avatar } from "../common/ui/Avatar";
 import React from "react";
-import { addComment } from "@/action";
+import { addComment } from "@/utils/action";
 
 type CommentWithDetails = PostType & {
   user: { displayName: string | null; username: string; img: string | null };

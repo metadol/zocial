@@ -8,8 +8,12 @@ import ProfileDetails from "@/components/profile/ProfileDetails";
 import { getUserProfile } from "@/utils/queries/profile";
 import { getCurrentUserId } from "@/utils/currentuser";
 
-export default async function Page({ params }: { params: { username: string } }) {
-  const { username } = params;
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ username: string }>;
+}) {
+  const { username } = await params;
 
   const userId = await getCurrentUserId();
 
