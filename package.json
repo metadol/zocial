@@ -24,6 +24,7 @@
     "socket.io-client": "^4.8.1",
     "timeago.js": "^4.0.0-beta.3",
     "ts-node": "^10.9.2",
+    "uuid": "^11.1.0",
     "zod": "^4.1.0"
   },
   "devDependencies": {

@@ -5,13 +5,16 @@ import InteractionButton from "../common/ui/InteractionButton";
 import { PostInteractionsProps } from "@/types/interface";
 import { likePost, rePost, savePost } from "@/utils/action";
 import React from "react";
+import { socket } from "@/socket";
+import { useUser } from "@clerk/nextjs";
 
 const PostInteractions: React.FC<PostInteractionsProps> = ({
   count,
   isLiked,
   isRePosted,
   isSaved,
-  postId
+  postId,
+  username
 }) => {
   const [state, setState] = React.useState({
     likes: count.likes,
@@ -21,8 +24,12 @@ const PostInteractions: React.FC<PostInteractionsProps> = ({
     isSaved,
   });
 
+  const { user } = useUser();
+
 
   const handleLike = async () => {
+
+    if(!user) return;
     // Update state immediately (no optimistic update needed)
     const newIsLiked = !state.isLiked;
     const newLikes = newIsLiked ? state.likes + 1 : state.likes - 1;
@@ -32,6 +39,15 @@ const PostInteractions: React.FC<PostInteractionsProps> = ({
       likes: newLikes,
       isLiked: newIsLiked,
     }));
+
+    socket.emit("send-notification", {
+      receiverUsername: username,
+      data: {
+        senderUsername:user?.username!,
+        type: "like",
+        link: `/${username}/status/${postId}`,
+      }
+    })
 
     try {
       await likePost(postId);

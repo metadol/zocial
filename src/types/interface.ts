@@ -102,4 +102,5 @@ export interface PostInteractionsProps {
   isRePosted?: boolean;
   isSaved?: boolean;
   postId?: number;
+  username?: string;
 }

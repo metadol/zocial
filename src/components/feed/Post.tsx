@@ -99,6 +99,7 @@ const Post = ({
             isReposted={!!origanalPost?.rePosts?.length}
             isSaved={!!origanalPost?.saves?.length}
             postId={origanalPost?.id}
+            username={origanalPost?.user?.username || undefined}
           />
         </div>
       </div>
