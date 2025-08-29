@@ -1,3 +1,4 @@
+import NavIcon from "../common/icons/NavIcon";
 import IKImageWrapper from "../media/IKImageWrapper";
 
 export default function NotificationButton({
@@ -14,19 +15,13 @@ export default function NotificationButton({
       onClick={onClick}
     >
       <div className="relative">
-        <IKImageWrapper
+        <NavIcon
           path="icons/notification.svg"
           alt="notification"
-          width={24}
-          height={24}
+          count={count}
         />
-        {count > 0 && (
-          <span className="absolute -top-3 -right-3 w-5 h-5 bg-iconBlue rounded-full flex items-center justify-center text-xs font-bold text-white">
-            {count}
-          </span>
-        )}
       </div>
-      <span className="hidden xxl:inline">Notifications</span>
+      <span className="hidden 2xl:inline">Notifications</span>
     </button>
   );
 }

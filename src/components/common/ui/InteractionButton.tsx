@@ -1,13 +1,5 @@
-import { SVGIconProps } from "@/types/interface";
+import { ColorClasses, IconColor, Interaction, SVGIconProps } from "@/types/interface";
 
-type IconColor = "iconBlue" | "iconGreen" | "iconRed";
-
-interface ColorClasses {
-  text: string;
-  textHover: string;
-  fill: string;
-  fillHover: string;
-}
 
 const colorMap: Record<IconColor, ColorClasses> = {
   iconBlue: {
@@ -30,13 +22,7 @@ const colorMap: Record<IconColor, ColorClasses> = {
   },
 };
 
-interface Interaction {
-  icon: React.ComponentType<SVGIconProps>;
-  count?: number;
-  hoverColor?: IconColor;
-  color?: IconColor; // Default color
-  action?: () => void;
-}
+
 
 const InteractionButton = ({
   icon: Icon,
@@ -60,7 +46,7 @@ const InteractionButton = ({
       <button
         className={`flex items-center gap-2 ${hoverColor ? "cursor-pointer" : ""} group`}
       >
-        <Icon className={iconClasses} />
+        {Icon && <Icon className={iconClasses} />} 
         {count !== undefined && <span className={`text-sm ${textClasses}`}>{count}</span>}
       </button>
     </form>

@@ -3,6 +3,8 @@ import Link from "next/link";
 import IKImageWrapper from "../media/IKImageWrapper";
 import { menuList } from "@/utils/data";
 import SocketProvider from "@/providers/SocketProvider";
+import Notification from "../notifications/Notification";
+import NavIcon from "../common/icons/NavIcon";
 
 interface LeftBarProps {
   isMobile?: boolean;
@@ -14,18 +16,23 @@ const LeftBar = ({ isMobile = false }: LeftBarProps) => {
     return (
       <div className="flex justify-around items-center py-3 px-4">
         {menuList?.slice(0, 4).map((item) => (
-          <Link
-            href={item.link}
-            key={item.id}
-            className="flex flex-col items-center gap-1 p-2 hover:bg-[#181818] rounded-lg transition-colors"
-          >
-            <IKImageWrapper
-              path={`/icons/${item.icon}`}
-              width={24}
-              height={24}
-              alt={item.name}
-            />
-          </Link>
+          item.id === 3 ? (
+            <div key={item.id}>
+              <Notification />
+            </div>
+
+          ) : (
+            <Link
+              href={item.link}
+              key={item.id}
+              className="flex flex-col items-center gap-1 p-2 hover:bg-[#181818] rounded-lg transition-colors"
+            >
+              <NavIcon
+                path={`/icons/${item.icon}`}
+                alt={item.name}
+              />
+            </Link>
+          )
         ))}
       </div>
     );
@@ -51,21 +58,27 @@ const LeftBar = ({ isMobile = false }: LeftBarProps) => {
 
         {/* Menu Items */}
         <div className="flex flex-col gap-4">
-          {menuList?.map((item) => (
-            <Link
-              href={item.link}
-              key={item.id}
-              className="flex items-center gap-4 p-2 hover:bg-[#181818] rounded-full transition-colors"
-            >
-              <IKImageWrapper
-                path={`/icons/${item.icon}`}
-                width={24}
-                height={24}
-                alt={item.name}
-              />
-              <span className="hidden 2xl:inline">{item.name}</span>
-            </Link>
-          ))}
+          {menuList?.map((item,) =>
+            item.id === 3 ? (
+              <div key={item.id}>
+                <Notification />
+              </div>
+
+            ) : (
+              <Link
+                href={item.link}
+                key={item.id}
+                className="flex items-center gap-4 p-2 hover:bg-[#181818] rounded-full transition-colors"
+              >
+                <NavIcon
+                  path={`/icons/${item.icon}`}
+                  alt={item.name}
+                />
+                <span className="hidden 2xl:inline">{item.name}</span>
+              </Link>
+            )
+          )}
+
         </div>
 
         {/* Post Button */}
@@ -83,6 +96,8 @@ const LeftBar = ({ isMobile = false }: LeftBarProps) => {
           <span className="hidden 2xl:block font-bold">Post</span>
         </Link>
       </div>
+      
+      <SocketProvider />
 
       {/* Bottom Section - User Profile */}
       <div className="flex items-center justify-between">
@@ -103,10 +118,10 @@ const LeftBar = ({ isMobile = false }: LeftBarProps) => {
         <div className="hidden 2xl:block cursor-pointer font-bold hover:bg-[#181818] p-2 rounded-full transition-colors">
           ...
         </div>
-        
+
       </div>
 
-      <SocketProvider/>
+
     </div>
   );
 };

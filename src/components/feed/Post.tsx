@@ -1,6 +1,6 @@
 // Post.tsx
 import { FC } from "react";
-import { RepostIcon } from "../common/ui/InteractionIcons";
+import { RepostIcon } from "../common/icons/InteractionIcons";
 import IKImageWrapper from "../media/IKImageWrapper";
 import InteractionButton from "../common/ui/InteractionButton";
 import PostInfo from "./PostInfo";
@@ -53,7 +53,7 @@ const Post = ({
       }
 
       {/* Layout Adjusted ere */}
-      <div className={`flex flex-col ${isStatus ? "" : " xs:flex-row gap-4"}`}>
+      <div className={`flex flex-col ${isStatus ? "" : " xs:flex-row gap-4"} relative `}>
         {/* Avatar outside (only for non-status posts) */}
         {!isStatus && (
           <Avatar path={origanalPost?.user.img} />

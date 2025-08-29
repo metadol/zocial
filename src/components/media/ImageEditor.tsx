@@ -5,7 +5,7 @@ import {
   OriginalIcon,
   SquareIcon,
   WideIcon,
-} from "../common/ui/InteractionIcons";
+} from "../common/icons/InteractionIcons";
 import { useEffect } from "react";
 
 const imageStyles: Record<"original" | "wide" | "square", string> = {

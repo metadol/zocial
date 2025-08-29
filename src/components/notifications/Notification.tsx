@@ -4,14 +4,9 @@ import { useEffect, useState, useCallback } from "react";
 import { socket } from "@/socket";
 import { useRouter } from "next/navigation";
 import NotificationButton from "./NotificationButton";
-import NotificationList from "./NotificationList";
+import NotificationList from "./NotificatoinList";
+import { NotificationType } from "@/types/interface";
 
-export type NotificationType = {
-  id: string;
-  senderUsername: string;
-  type: "like" | "comment" | "rePost" | "follow";
-  link: string;
-};
 
 export default function Notification() {
   const [notifications, setNotifications] = useState<NotificationType[]>([]);
@@ -23,9 +18,9 @@ export default function Notification() {
       setNotifications((prev) => [...prev, data]);
     };
 
-    socket.on("getNotification", handleNotification);
+    socket.on("get-notification", handleNotification);
     return () => {
-      socket.off("getNotification", handleNotification);
+      socket.off("get-notification", handleNotification);
     };
   }, []);
 
@@ -44,8 +39,11 @@ export default function Notification() {
   );
 
   return (
-    <div className="relative mb-4">
-      <NotificationButton count={notifications.length} onClick={() => setOpen((p) => !p)} />
+    <div className="relative">
+      <NotificationButton
+        count={notifications.length}
+        onClick={() => setOpen((p) => !p)}
+      />
       {open && (
         <NotificationList
           notifications={notifications}

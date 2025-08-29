@@ -1,6 +1,6 @@
 "use client";
 
-import { LogoIcon, GoogleIcon } from "@/components/common/ui/LogoIcons";
+import { LogoIcon, GoogleIcon } from "@/components/common/icons/LogoIcons";
 import * as Clerk from "@clerk/elements/common";
 import * as SignUp from "@clerk/elements/sign-up";
 import Link from "next/link";

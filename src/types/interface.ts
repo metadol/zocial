@@ -104,3 +104,29 @@ export interface PostInteractionsProps {
   postId?: number;
   username?: string;
 }
+
+export interface NotificationType {
+  id: string;
+  senderUsername: string;
+  type: "like" | "comment" | "rePost" | "follow";
+  link: string;
+}
+
+
+export type IconColor = "iconBlue" | "iconGreen" | "iconRed";
+
+export interface ColorClasses {
+  text: string;
+  textHover: string;
+  fill: string;
+  fillHover: string;
+}
+
+
+export interface Interaction {
+  icon?: React.ComponentType<SVGIconProps>;
+  count?: number;
+  hoverColor?: IconColor;
+  color?: IconColor; // Default color
+  action?: () => void;
+}

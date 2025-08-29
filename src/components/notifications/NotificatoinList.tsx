@@ -1,4 +1,4 @@
-import { NotificationType } from "./types";
+import { NotificationType } from "@/types/interface";
 import NotificationItem from "./NotificationItem";
 
 export default function NotificationList({
@@ -11,7 +11,7 @@ export default function NotificationList({
   onReset: () => void;
 }) {
   return (
-    <div className="absolute -right-full p-4 rounded-lg bg-white text-black shadow-lg w-64">
+    <div className="absolute bottom-12 sm:bottom-auto right-[-40px] sm:right-auto p-4 rounded-lg bg-black text-textPrimary shadow-lg w-64 border border-borderGray z-50">
       <h2 className="text-lg font-semibold text-gray-700 mb-2">Notifications</h2>
       {notifications.length > 0 ? (
         <ul className="flex flex-col gap-2">

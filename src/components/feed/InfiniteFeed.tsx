@@ -18,6 +18,7 @@ const fetchPosts = async (pageParam: number, userProfileId?: string) => {
 };
 
 const InfiniteFeed = ({ userProfileId }: FeedProps) => {
+  
   const {
     data,
     error,

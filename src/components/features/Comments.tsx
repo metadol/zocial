@@ -7,6 +7,7 @@ import { useUser } from "@clerk/nextjs";
 import { Avatar } from "../common/ui/Avatar";
 import React from "react";
 import { addComment } from "@/utils/action";
+import { socket } from "@/socket";
 
 type CommentWithDetails = PostType & {
   user: { displayName: string | null; username: string; img: string | null };
@@ -32,6 +33,20 @@ const Comments = ({
     success: false,
     error: false,
   });
+
+
+  React.useEffect(() => {
+    if (state.success) {
+      socket.emit("sendNotification", {
+        receiverUsername: username,
+        data: {
+          senderUsername: user?.username,
+          type: "comment",
+          link: `/${username}/status/${postId}`,
+        },
+      });
+    }
+  }, [state.success]);
 
   return (
     <div className={`${comments.length === 0 ? "border-y" : "border-t"} border-borderGray`}>

@@ -4,7 +4,7 @@ import {
   LikeIcon,
   BookmarkIcon,
   ShareIcon,
-} from "@/components/common/ui/InteractionIcons";
+} from "@/components/common/icons/InteractionIcons";
 
 export const menuList = [
   {

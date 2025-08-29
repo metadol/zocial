@@ -1,4 +1,4 @@
-import { NotificationType } from "./types";
+import { NotificationType } from "@/types/interface";
 
 const notificationMessages: Record<NotificationType["type"], string> = {
   like: "liked your post",
