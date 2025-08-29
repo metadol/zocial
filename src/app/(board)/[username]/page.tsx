@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import Feed from "@/components/feed/Feed";
-import FeedHeader from "@/components/feed/FeedHeader";
 import ProfileHeader from "@/components/profile/ProfileHeader";
 import ProfileActions from "@/components/profile/ProfileActions";
 import ProfileDetails from "@/components/profile/ProfileDetails";
 import { getUserProfile } from "@/utils/queries/profile";
 import { getCurrentUserId } from "@/utils/currentuser";
+import FeedHeader from "@/components/common/ui/FeedHeader";
 
 export default async function Page({
   params,

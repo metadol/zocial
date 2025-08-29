@@ -1,6 +1,6 @@
+import FeedHeader from "@/components/common/ui/FeedHeader";
 import Comments from "@/components/features/Comments";
 import Post from "@/components/feed/Post";
-import FeedHeader from "@/components/feed/FeedHeader";
 import { getCurrentUserId } from "@/utils/currentuser";
 import { getPostById } from "@/utils/queries/singlepost";
 

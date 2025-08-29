@@ -22,8 +22,6 @@ const colorMap: Record<IconColor, ColorClasses> = {
   },
 };
 
-
-
 const InteractionButton = ({
   icon: Icon,
   count,

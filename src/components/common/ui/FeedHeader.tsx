@@ -1,5 +1,5 @@
 import { HeaderProps } from "@/types/interface";
-import {BackButton} from "../common/ui/Button"; // client component
+import { BackButton } from "./Button";
 ; // optional if used elsewhere
 
 
