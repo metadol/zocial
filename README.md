@@ -1,4 +1,4 @@
-# ZOCIAL (Next.js 15 + Prisma + Clerk + React Query)
+# ZOCIAL 
 
 ![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=nextdotjs)
 ![Prisma](https://img.shields.io/badge/Prisma-ORM-blue?logo=prisma)
