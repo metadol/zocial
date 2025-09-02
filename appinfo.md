@@ -1,4 +1,11 @@
-# 📱 Social Media App (Next.js 15 + Prisma + Clerk + React Query)
+# ZOCIAL (Next.js 15 + Prisma + Clerk + React Query)
+
+![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=nextdotjs)
+![Prisma](https://img.shields.io/badge/Prisma-ORM-blue?logo=prisma)
+![Clerk](https://img.shields.io/badge/Auth-Clerk-orange?logo=clerk)
+![React Query](https://img.shields.io/badge/React%20Query-TanStack-critical?logo=reactquery)
+![Socket.io](https://img.shields.io/badge/Real--Time-Socket.io-lightgrey?logo=socketdotio)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 This is a full-stack modern social media application built using the latest features from the Next.js 15 ecosystem, Prisma ORM, Clerk for authentication, and real-time updates using Socket.io.
 
@@ -73,20 +80,9 @@ custom auth pages usong clerk elemenes
 
 ---
 
-## 🧰 Dev Commands
+![ER Diagram](public/general/er-diagram.png)
+![ER Diagram](public/general/arc-diagram.png)
 
-```bash
-# Install dependencies
-pnpm install
+---
 
-# Run dev server
-pnpm dev
 
-# Run Prisma Studio
-pnpm prisma studio
-
-# Run migrations
-pnpm prisma migrate dev
-
-# Seed DB
-pnpm db:seed
