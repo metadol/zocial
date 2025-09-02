@@ -10,15 +10,15 @@
 This is a full-stack modern social media application built using the latest features from the Next.js 15 ecosystem, Prisma ORM, Clerk for authentication, and real-time updates using Socket.io.
 
 
----
-## 🗄️ Database ER Diagram
-![ER Diagram](public/general/er-diagram.png)
 
----
 
 ## 🏛️ Architecture Diagram
 ![Architecture Diagram](public/general/arc-diagram.png)
 
----
+
+## 🗄️ Database ER Diagram
+![ER Diagram](public/general/er-diagram.png)
+
+
 
 
